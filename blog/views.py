@@ -10,4 +10,5 @@ def index(request):
     return render(request, 'index.html', {'titulo': 'Últimos Artigos'})
 
 def ola(request):
-    return HttpResponse('ola Django')
+    # return HttpResponse('ola Django')
+    return render(request, 'home.html')
