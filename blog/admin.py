@@ -6,3 +6,5 @@ from blog.models import Post # importa o model que vamos habilitar no admin site
 class PostAdmin(admin.ModelAdmin): # configura o model Post no admin site.
   list_display = ('id', 'body_text', 'pub_date')
   list_filter = ('pub_date',)
+  
+
