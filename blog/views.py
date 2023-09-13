@@ -1,9 +1,13 @@
 import json
-from django.core.serializers.json import DjangoJSONEncoder
 
+from django.core.serializers.json import DjangoJSONEncoder
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
+
 
 # incluir a class Httresponse.
 from django.http import HttpResponse
@@ -59,8 +63,40 @@ def get_post(request, post_id):
     response['Access-Control-Allow-Origin'] = '*' # requisição de qualquer origem
     return response
 
+class PostCreateView(CreateView):
+    model = Post
+    template_name = 'post/post_form.html'
+    fields = ('body_text', )
+    success_url = reverse_lazy('posts_list')
 
-    
+@csrf_exempt
+def create_post(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        body_text = data.get('body_text')
+        if body_text is None:
+            data = {'success': False, 'error': 'Texto do post inválido.'}
+            status = 400 # Bad Request => erro do client
+        else:
+            post = Post(body_text=body_text)
+            post.save()
+            post_data = Post.objects.filter(
+                pk=post.id
+             ).values(
+                 'pk', 'body_text', 'pub_date'
+                 ).first()
+            data = {'success': True, 'post': post_data}
+            status = 201 # Created
+
+    response = HttpResponse(
+        json.dumps(data, indent=1, cls=DjangoJSONEncoder),
+        content_type="application/json",
+        status=status
+)
+    response['Access-Control-Allow-Origin'] = '*'
+
+    return response
+  
 
     
     
