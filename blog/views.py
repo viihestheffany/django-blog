@@ -1,7 +1,7 @@
 import json
 
 from django.core.serializers.json import DjangoJSONEncoder
-from django.views.generic.detail import DetailView
+from django.views.generic import DetailView, ListView, TemplateView
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post
 from django.views.generic.edit import CreateView
@@ -97,7 +97,13 @@ def create_post(request):
 
     return response
   
+class PostListView(ListView):
+    model = Post
+    template_name = 'post/post_list.html'
+    context_object_name = 'posts'
 
+class SobreTemplateView(TemplateView):
+    template_name = 'post/sobre.html'
     
     
 
