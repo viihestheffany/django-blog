@@ -4,6 +4,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.views.generic import DetailView, ListView, TemplateView
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post
+from blog.forms import PostModelForm
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
@@ -66,8 +67,9 @@ def get_post(request, post_id):
 class PostCreateView(CreateView):
     model = Post
     template_name = 'post/post_form.html'
-    fields = ('body_text', )
+    #fields = ('body_text', )
     success_url = reverse_lazy('posts_list')
+    form_class = PostModelForm
 
 @csrf_exempt
 def create_post(request):
@@ -104,6 +106,5 @@ class PostListView(ListView):
 
 class SobreTemplateView(TemplateView):
     template_name = 'post/sobre.html'
-    
     
 
