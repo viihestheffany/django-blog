@@ -19,6 +19,7 @@ bg-white border-bottom shadow-sm">
         <a class="p-2 text-dark" href="{% url 'posts_all' %}">Postagens</a>
         <a class="p-2 text-dark" href="{% url 'about_page' %}">Sobre</a>
         {% if user.is_authenticated %} {# objeto user sempre está disponível nos templates #}
+            <a class="p-2 text-dark" href="{% url 'account_edit' pk=user.pk %}">Minha conta</a>
             <a class="p-2 text-dark" href="{% url 'logout' %}">Sair</a>
         {% else %}
             <a class="p-2 text-dark" href="{% url 'signup' %}">Cadastrar</a>
