@@ -141,3 +141,5 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
