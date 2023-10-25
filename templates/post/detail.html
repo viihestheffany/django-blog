@@ -1,5 +1,10 @@
 {% extends '_layout1.html' %} <!-- herda tudo que já tem em _layout1.html -->
 {% block content %} <!-- substitui o bloco content em _layout1.html -->
+
+{% if post.categoria %}
+  <span>Categoria: {{ post.categoria }}</span>
+{% endif %}
+
 <article>
   <h1>{{ post.pub_date|date:"d / m / Y" }}</h1>
   <p>{{ post.body_text }}</p>

@@ -14,6 +14,9 @@
     <a href="{% url 'post_edit' pk=post.id %}" class="link-secondary">
       Editar
     </a>
+    <a href="{% url 'post_delete' pk=post.id %}" class="link-secondary">
+      Excluir
+    </a>
 
     {% if post.categoria %}
     <span>Categoria: {{ post.categoria }}</span>
