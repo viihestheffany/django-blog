@@ -10,7 +10,10 @@
       + Novo post
     </a>
     {% for post in posts %}
-    <article>
+
+    <a href="{% url 'post_edit' pk=post.id %}" class="link-secondary">
+      Editar
+    </a>
 
     {% if post.categoria %}
     <span>Categoria: {{ post.categoria }}</span>
