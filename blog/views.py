@@ -74,9 +74,10 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     form_class = PostModelForm
     success_message = 'Postagem salva com sucesso.'
 
-    def form_valid(self, request, *args, **kwargs):
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
         messages.success(self.request, self.success_message)
-        return super(PostCreateView, self).form_valid(request, *args, **kwargs)
+        return super(PostCreateView, self).form_valid(form)
     def get_context_data(self, **kwargs):
         context = super(PostCreateView, self).get_context_data(**kwargs)
         context['form_title'] = 'Criando um post'

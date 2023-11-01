@@ -9,6 +9,7 @@
     <a href="{% url 'post_add' %}" class="btn btn-primary mb-3">
       + Novo post
     </a>
+    <br>
     {% for post in posts %}
 
     <a href="{% url 'post_edit' pk=post.id %}" class="link-secondary">
@@ -22,7 +23,13 @@
     <span>Categoria: {{ post.categoria }}</span>
     {% endif %}
 
-      <h2>Em: {{ post.pub_date|date:"d / m / Y" }}</h2>
+      {%if post.autor %}
+        <span>Autor: {{post.autor.username}}</span>
+        {% else %}
+          <span>Autor: Desconhecido</span>
+        {% endif %} <br>
+
+       <h2>Em: {{ post.pub_date|date:"d / m / Y" }}</h2>
       <p>{{ post.body_text }}</p>
     </article>
     {% endfor %}
