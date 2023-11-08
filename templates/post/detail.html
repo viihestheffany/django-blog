@@ -9,4 +9,12 @@
   <h1>{{ post.pub_date|date:"d / m / Y" }}</h1>
   <p>{{ post.body_text }}</p>
 </article>
+<div class="card-body">
+  <from action="{ url 'post_send' post_id=post.id %'}" method="post">
+    {% csrf_token %}
+    <label for="email">comapartilhar</label>
+    <input type="text" id="email" name="email" placeholder="informar o e-mail" value="" />
+    <button type="submit" class="=bnt bnt-warning">Enviar</button>
+  </from>
+</div>
 {% endblock %} <!-- fecha o bloco content -->

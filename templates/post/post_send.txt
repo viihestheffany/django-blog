@@ -1,0 +1,5 @@
+Olá,
+
+Li este texto e acredito que seja de seu interesse!
+
+Acesse em {{ post_link }}.
